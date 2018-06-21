@@ -1,75 +1,48 @@
 package Code;
 
-public class ServicoForumGamificacaoProxy implements ServicoForum{
-	
+public class ServicoForumGamificacaoProxy implements ServicoForum {
+
 	@Override
 	public void adicionarComentario(String usuario, String topico, String comentario) {
-		
-		if(FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "PARTICIPACAO") == null) {
-			Pontos pontos = new Pontos();
-			pontos.nome = "PARTICIPACAO";
-			pontos.increment(3);
-			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
-		}else {
-			Conquista pontos = FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "PARTICIPACAO");
-			((Pontos) pontos).increment(3);
-			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
-		}
-		
-		if(FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "MEUS DOIS CENTS") == null) {
-			Insignia addInsignia = new Insignia();
-			addInsignia.nome = "MEUS DOIS CENTS";
-			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, addInsignia);
-		}
-		
+		incrementPontos(usuario, 3, TipoConquista.PARTICIPACAO);
+		incrementInsignia(usuario, TipoConquista.MEUS_DOIS_CENTS);
 	}
-	
+
 	@Override
 	public void darLikeComentario(String usuario, String topico, String comentario, String comentarioUsuario) {
-		if(FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "PARTICIPACAO") == null) {
-			Pontos pontos = new Pontos();
-			pontos.nome = "PARTICIPACAO";
-			pontos.increment(1);
-			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
-		}else {
-			Conquista pontos = FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "PARTICIPACAO");
-			((Pontos) pontos).increment(1);
-			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
-		}
-		
+		incrementPontos(usuario, 1, TipoConquista.PARTICIPACAO);
 	}
-	
+
 	public void adicionarTopico(String usuario, String topico) {
-		if(FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "CRIACAO") == null) {
-			Pontos pontos = new Pontos();
-			pontos.nome = "CRIACAO";
-			pontos.increment(5);
-			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
-		}else {
-			Conquista pontos = FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "CRIACAO");
-			((Pontos) pontos).increment(5);
-			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
-		}
-		
-		if(FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "EU FALO, SABIA?") == null) {
-			Insignia addInsignia = new Insignia();
-			addInsignia.nome = "EU FALO, SABIA?";
-			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, addInsignia);
-		}
-		
+		incrementPontos(usuario, 5, TipoConquista.CRIACAO);
+		incrementInsignia(usuario, TipoConquista.EU_FALO_SABIA);
 	}
-	
+
 	public void darLikeTopico(String usuario, String topico, String topicoUsuario) {
-		if(FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "CRIACAO") == null) {
+		incrementPontos(usuario, 1, TipoConquista.CRIACAO);
+	}
+
+	private void incrementPontos(String usuario, int increment, TipoConquista tipoConquista) {
+		if (FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario,
+				tipoConquista.getNome()) == null) {
 			Pontos pontos = new Pontos();
-			pontos.nome = "CRIACAO";
-			pontos.increment(1);
+			pontos.nome = tipoConquista.getNome();
+			pontos.increment(increment);
 			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
-		}else {
-			Conquista pontos = FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "CRIACAO");
-			((Pontos) pontos).increment(1);
+		} else {
+			Conquista pontos = FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario,
+					tipoConquista.getNome());
+			((Pontos) pontos).increment(increment);
 			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
 		}
 	}
 	
+	private void incrementInsignia(String usuario, TipoConquista tipoConquista) {
+		if (FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario,
+				tipoConquista.getNome()) == null) {
+			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario,
+					new Insignia(tipoConquista.getNome()));
+		}
+	}
+
 }

@@ -1,6 +1,6 @@
 package Code;
 
-public class Pontos extends Conquista{
+public class Pontos extends Conquista {
 
 	private int valor = 0;
 
