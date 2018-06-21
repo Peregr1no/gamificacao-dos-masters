@@ -26,18 +26,50 @@ public class ServicoForumGamificacaoProxy implements ServicoForum{
 	
 	@Override
 	public void darLikeComentario(String usuario, String topico, String comentario, String comentarioUsuario) {
-		// TODO Auto-generated method stub
+		if(FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "PARTICIPACAO") == null) {
+			Pontos pontos = new Pontos();
+			pontos.nome = "PARTICIPACAO";
+			pontos.increment(1);
+			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
+		}else {
+			Conquista pontos = FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "PARTICIPACAO");
+			((Pontos) pontos).increment(1);
+			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
+		}
 		
 	}
 	
 	public void adicionarTopico(String usuario, String topico) {
-		// TODO Auto-generated method stub
+		if(FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "CRIACAO") == null) {
+			Pontos pontos = new Pontos();
+			pontos.nome = "CRIACAO";
+			pontos.increment(5);
+			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
+		}else {
+			Conquista pontos = FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "CRIACAO");
+			((Pontos) pontos).increment(5);
+			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
+		}
+		
+		if(FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "EU FALO, SABIA?") == null) {
+			Insignia addInsignia = new Insignia();
+			addInsignia.nome = "EU FALO, SABIA?";
+			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, addInsignia);
+		}
 		
 	}
 	
 	public void darLikeTopico(String usuario, String topico, String topicoUsuario) {
-		// TODO Auto-generated method stub
-		
+		if(FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "CRIACAO") == null) {
+			Pontos pontos = new Pontos();
+			pontos.nome = "CRIACAO";
+			pontos.increment(1);
+			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
+		}else {
+			Conquista pontos = FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "CRIACAO");
+			((Pontos) pontos).increment(1);
+			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
+		}
 	}
 	
 }

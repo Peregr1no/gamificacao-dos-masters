@@ -45,14 +45,13 @@ public class ArmazenamentoMemoriaConquista implements ArmazenamentoConquista{
 			if(indice == naoPossuiConquista) {
 				manipulaConquistas.add(conquista);
 			}else {
+				manipulaConquistas.remove(indice);
 				manipulaConquistas.add(indice, conquista);
 			}
 			armConquistaUsuario.put(usuario, manipulaConquistas);
-			System.out.println("Atualizei um usuario existente e suas conquistas");
 		}else {
 			manipulaConquistas.add(conquista);
-			armConquistaUsuario.put(usuario, manipulaConquistas);
-			System.out.println("Adicionei um novo usuario e sua conquista");
+			armConquistaUsuario.put(usuario, manipulaConquistas);;
 		}
 	}
 	

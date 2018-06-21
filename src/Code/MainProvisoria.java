@@ -22,6 +22,12 @@ public class MainProvisoria {
 		
 		game.adicionarComentario("Erik", "New Topic", "Aehue");
 		
+		game.adicionarTopico("Erik", "Meu topico");
+		
+		game.darLikeComentario("Erik", "Nao sei", "Aehoo", "Leo");
+		
+		game.darLikeTopico("Erik", "Agora vai", "Nao sei");
+		
 		List<Conquista> listas = FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquistas("Erik");
 		
 		for(int i = 0; i < listas.size(); i++) {
@@ -29,7 +35,7 @@ public class MainProvisoria {
 				System.out.print(listas.get(i).nome + " - Pontos:");
 				System.out.println(((Pontos )listas.get(i)).getValor());
 			}else {
-				System.out.print("Insignia: " + listas.get(i).nome);
+				System.out.println("Insignia: " + listas.get(i).nome);
 			}
 		}
 		
