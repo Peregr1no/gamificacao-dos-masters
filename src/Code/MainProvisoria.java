@@ -1,21 +1,37 @@
 package Code;
 
+import java.util.List;
+
 public class MainProvisoria {
 
 	public static void main(String[] args) {
 		
-		ArmazenamentoConquista testeProvi = ArmazenamentoMemoriaConquista.getInstance();
+		ArmazenamentoConquista arm = ArmazenamentoMemoriaConquista.getInstance();
 		
-		Pontos teste = new Pontos();
-		teste.tipo = "Ola";
+		FabricaArmazenamentoConquista fabrica = new FabricaArmazenamentoConquista();
 		
-		testeProvi.addConquista("Teste", teste);
-		testeProvi.addConquista("Teste", teste);
+		fabrica.setArmazenamentoConquista(arm);
 		
-		ArmazenamentoConquista testeProvi2 = new ArmazenamentoMemoriaConquista();
+		ServicoForumGamificacaoProxy game = new ServicoForumGamificacaoProxy();
+		
+		game.adicionarComentario("Erik", "New Topic", "Aehue");
 
-		testeProvi2.addConquista("Teste", teste);
-		testeProvi2.addConquista("Ola", teste);
+		game.adicionarComentario("Erik", "New Topic", "Aehue");
+		
+		game.adicionarComentario("Erik", "New Topic", "Aehue");
+		
+		game.adicionarComentario("Erik", "New Topic", "Aehue");
+		
+		List<Conquista> listas = FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquistas("Erik");
+		
+		for(int i = 0; i < listas.size(); i++) {
+			if(listas.get(i) instanceof Pontos) {
+				System.out.print(listas.get(i).nome + " - Pontos:");
+				System.out.println(((Pontos )listas.get(i)).getValor());
+			}else {
+				System.out.print("Insignia: " + listas.get(i).nome);
+			}
+		}
 		
 	}
 

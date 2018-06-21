@@ -1,10 +1,26 @@
 package Code;
 
 public class ServicoForumGamificacaoProxy implements ServicoForum{
-
+	
 	@Override
 	public void adicionarComentario(String usuario, String topico, String comentario) {
-		// TODO Auto-generated method stub
+		
+		if(FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "PARTICIPACAO") == null) {
+			Pontos pontos = new Pontos();
+			pontos.nome = "PARTICIPACAO";
+			pontos.increment(3);
+			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
+		}else {
+			Conquista pontos = FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "PARTICIPACAO");
+			((Pontos) pontos).increment(3);
+			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
+		}
+		
+		if(FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario, "MEUS DOIS CENTS") == null) {
+			Insignia addInsignia = new Insignia();
+			addInsignia.nome = "MEUS DOIS CENTS";
+			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, addInsignia);
+		}
 		
 	}
 	

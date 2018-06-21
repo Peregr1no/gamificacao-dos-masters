@@ -12,6 +12,11 @@ public class ArmazenamentoMemoriaConquista implements ArmazenamentoConquista{
 	
 	private List<Conquista> manipulaConquistas = new ArrayList<>();
 	
+	private static int naoPossuiConquista = -1;
+	
+	private ArmazenamentoMemoriaConquista() {
+	}
+	
 	public static synchronized ArmazenamentoConquista getInstance() {
 		if(uniqueInstance == null) {
 			uniqueInstance = new ArmazenamentoMemoriaConquista();
@@ -25,25 +30,28 @@ public class ArmazenamentoMemoriaConquista implements ArmazenamentoConquista{
 	
 	public int getIndice(List<Conquista> listaConquista, String nomeConquista) {
 		for(int i = 0; i < listaConquista.size(); i++) {
-			if(listaConquista.get(i).tipo.equalsIgnoreCase(nomeConquista)) {
+			if(listaConquista.get(i).nome.equalsIgnoreCase(nomeConquista)) {
 				return i;
 			}
 		}
-		return 0;
+		return naoPossuiConquista;
 	}
 	
 	@Override
 	public void addConquista(String usuario, Conquista conquista) {
 		if(checkExist(usuario)){
 			manipulaConquistas = getConquistas(usuario);
-			int indice = getIndice(manipulaConquistas, conquista.tipo);
-			manipulaConquistas.add(indice, conquista);
+			int indice = getIndice(manipulaConquistas, conquista.nome);
+			if(indice == naoPossuiConquista) {
+				manipulaConquistas.add(conquista);
+			}else {
+				manipulaConquistas.add(indice, conquista);
+			}
 			armConquistaUsuario.put(usuario, manipulaConquistas);
-			System.out.println("Atualizei um usuario existente e sua conquista");
+			System.out.println("Atualizei um usuario existente e suas conquistas");
 		}else {
-			List<Conquista> novasConquistas = new ArrayList<>();
-			novasConquistas.add(conquista);
-			armConquistaUsuario.put(usuario, novasConquistas);
+			manipulaConquistas.add(conquista);
+			armConquistaUsuario.put(usuario, manipulaConquistas);
 			System.out.println("Adicionei um novo usuario e sua conquista");
 		}
 	}
@@ -63,11 +71,11 @@ public class ArmazenamentoMemoriaConquista implements ArmazenamentoConquista{
 		
 		List<Conquista> listaGet = getConquistas(usuario);
 		for(int i = 0; i < listaGet.size(); i++) {
-			if(listaGet.get(i).tipo.equals(nomeConquista)) {
+			if(listaGet.get(i).nome.equals(nomeConquista)) {
 				return listaGet.get(i);
 			}
 		}
-		return new Pontos();
+		return null;
 	}
 	
 }
