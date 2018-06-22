@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
 public class ArmazenamentoMemoriaConquista implements ArmazenamentoConquista, ObservadorConquista {
 
 	private static ArmazenamentoConquista uniqueInstance;
@@ -91,9 +92,9 @@ public class ArmazenamentoMemoriaConquista implements ArmazenamentoConquista, Ob
 
 				}
 			}
-			System.out.println("Você esta com: " + ((Pontos) a).getValor() + " pontos / " + a.nome);
+			System.out.println("O usuario " + usuario + " esta com: " + ((Pontos) a).getValor() + " pontos / " + a.nome);
 		} else {
-			System.out.println("Você ganhou a insignia: " + a.nome);
+			System.out.println("O usuario: "+ usuario +" ganhou a insignia: " + a.nome);
 		}
 	}
 
@@ -101,7 +102,7 @@ public class ArmazenamentoMemoriaConquista implements ArmazenamentoConquista, Ob
 		manipulaConquistas = getConquistas(usuario);
 		manipulaConquistas.add(new Insignia(tipoConquista.getNome()));
 		armConquistaUsuario.put(usuario, manipulaConquistas);
-		System.out.println("Parabéns você se tornou " + tipoConquista.getNome());
+		System.out.println("O usuario " + usuario +" se tornou " + tipoConquista.getNome() + " Parab�ns");
 	}
 
 }

@@ -7,4 +7,8 @@ public abstract class Conquista {
 		public boolean verificaTipoConquista(Conquista conquista) {
 				return conquista instanceof Pontos;
 		}
+		
+		public String getNome() {
+			return this.nome;
+		}
 }

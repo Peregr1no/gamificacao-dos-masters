@@ -1,7 +1,6 @@
 package Code;
 
-
-public class MainProvisoria {
+public class Main {
 
 	public static void main(String[] args) {
 		
@@ -13,12 +12,9 @@ public class MainProvisoria {
 		
 		ServicoForumGamificacaoProxy game = new ServicoForumGamificacaoProxy();
 		
-		game.adicionarComentario("Erik", "New Topic", "Aehue");
-	
 		game.adicionarTopico("Erik", "Meu topico");
-		
-		game.darLikeTopico("Erik", "Agora vai", "Nao sei");
-		
+		game.adicionarTopico("Erik", "Meu topico2");
+
 	}
 
 }
