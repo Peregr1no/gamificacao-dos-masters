@@ -50,8 +50,9 @@ public class ArmazenamentoMemoriaConquista implements ArmazenamentoConquista, Ob
 			}
 			armConquistaUsuario.put(usuario, manipulaConquistas);
 		} else {
-			manipulaConquistas.add(conquista);
-			armConquistaUsuario.put(usuario, manipulaConquistas);
+			List<Conquista> manipulaConquistasTemp = new ArrayList<>();
+			manipulaConquistasTemp.add(conquista);
+			armConquistaUsuario.put(usuario, manipulaConquistasTemp);
 		}
 		atualizarConquista(usuario, conquista);
 	}
@@ -102,7 +103,7 @@ public class ArmazenamentoMemoriaConquista implements ArmazenamentoConquista, Ob
 		manipulaConquistas = getConquistas(usuario);
 		manipulaConquistas.add(new Insignia(tipoConquista.getNome()));
 		armConquistaUsuario.put(usuario, manipulaConquistas);
-		System.out.println("O usuario " + usuario +" se tornou " + tipoConquista.getNome() + " Parabéns");
+		System.out.println("O usuario " + usuario +" se tornou " + tipoConquista.getNome() + " Parabï¿½ns");
 	}
 
 }

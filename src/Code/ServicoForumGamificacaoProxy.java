@@ -36,7 +36,7 @@ public class ServicoForumGamificacaoProxy implements ServicoForum {
 			FabricaArmazenamentoConquista.getArmazenamentoConquista().addConquista(usuario, pontos);
 		}
 	}
-	
+
 	private void incrementInsignia(String usuario, TipoConquista tipoConquista) {
 		if (FabricaArmazenamentoConquista.getArmazenamentoConquista().getConquista(usuario,
 				tipoConquista.getNome()) == null) {

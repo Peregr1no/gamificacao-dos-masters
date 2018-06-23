@@ -12,8 +12,8 @@ public class Main {
 		
 		ServicoForumGamificacaoProxy game = new ServicoForumGamificacaoProxy();
 		
-		game.adicionarTopico("Erik", "Meu topico");
-		game.adicionarTopico("Erik", "Meu topico2");
+		game.adicionarComentario("Teste6", "T�pico de teste", "Comentario");
+		game.darLikeComentario("Teste6", "T�pico de teste", "Comentario testoso", "Comentario usuario");
 
 	}
 
